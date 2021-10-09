@@ -6,11 +6,11 @@ Ok.. He did it with an Atari computer in 1990! I want to reproduce this...
 
 First of all, I need to calculate the mechanism kinematics. Here is my calculations:
 
-![Alt text](figuresGit/figure1.png "layout")
-![Alt text](figuresGit/figure2.png "layout")
-![Alt text](figuresGit/figure3.png "layout")
-![Alt text](figuresGit/figure4.png "layout")
-![Alt text](figuresGit/figure5.png "layout")
-![Alt text](figuresGit/figure6.png "layout")
+![Alt text](figuresGit/figure1.jpg "layout")
+![Alt text](figuresGit/figure2.jpg "layout")
+![Alt text](figuresGit/figure3.jpg "layout")
+![Alt text](figuresGit/figure4.jpg "layout")
+![Alt text](figuresGit/figure5.jpg "layout")
+![Alt text](figuresGit/figure6.jpg "layout")
 
 For now, the python code only plots the kinematics results. 
