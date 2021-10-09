@@ -105,13 +105,13 @@ from collections import deque
 
 constA = 1
 constB = 1
-constC = 1.3
-#constC = 1.5
+#constC = 1.3
+constC = 1.5
 constD = 1
 constE = 1
 constF = 1
-constG = 1.3
-#constG = 1.5
+#constG = 1.3
+constG = 1.5
 constH = 1
 constI = 1
 constJ = 1
@@ -136,12 +136,30 @@ def definirParametros():
     
 parametros = definirParametros()
 
+def erroDistancia(P1, P2, d):
+    dCalculada = sqrt((P1[0] - P2[0])**2 + (P1[1] - P2[1])**2)
+    return dCalculada - d
+
+def calculaErros(Pi, Po, Pa, Pb, Pc, Pd):
+    erroA = erroDistancia(Pa, Pb, parametros["a"])
+    erroB = erroDistancia(Pa, [0,0], parametros["b"])
+    erroC = erroDistancia(Pa, Pi, parametros["c"])
+    erroD = erroDistancia(Pb, [0,0], parametros["d"])
+    erroE = erroDistancia(Pb, Pc, parametros["e"])
+    erroF = erroDistancia(Pd, [0,0], parametros["f"])
+    erroG = erroDistancia(Pd, Pi, parametros["g"])
+    erroH = erroDistancia(Pc, Pd, parametros["h"])
+    erroI = erroDistancia(Pc, Po, parametros["i"])
+    erroJ = erroDistancia(Pd, Po, parametros["j"])
+    
+    return [erroA, erroB, erroC, erroD, erroE, erroF, erroG, erroH, erroI, erroJ]
+
 ## Derivadas dos Estados
 def cinematicaDiretaPi(phi):
-    #return [parametros["k"] + parametros["m"] * cos(phi),
-    #        parametros["l"] + parametros["m"] * sin(phi)]
-    return [-parametros["k"] - parametros["m"] * cos(phi),
-            -parametros["l"] - parametros["m"] * sin(phi)]
+    return [parametros["k"] + parametros["m"] * cos(phi),
+            parametros["l"] + parametros["m"] * sin(phi)]
+    #return [-parametros["k"] - parametros["m"] * cos(phi),
+    #        -parametros["l"] - parametros["m"] * sin(phi)]
 
 def cinematicaDiretaPa(Pi):
     tempA = -Pi[0]/Pi[1];
@@ -279,26 +297,7 @@ line, = ax.plot([], [], 'o-', lw=2)
 trace, = ax.plot([], [], ',-', lw=1)
 phi_template = 'phi = %.1f'
 time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
-history_x, history_y = deque(maxlen=history_len), deque(maxlen=history_len)
-
-def erroDistancia(P1, P2, d):
-    dCalculada = sqrt((P1[0] - P2[0])**2 + (P1[1] - P2[1])**2)
-    return dCalculada - d
-
-def calculaErros(Pi, Po, Pa, Pb, Pc, Pd):
-    erroA = erroDistancia(Pa, Pb, parametros["a"])
-    erroB = erroDistancia(Pa, [0,0], parametros["b"])
-    erroC = erroDistancia(Pa, Pi, parametros["c"])
-    erroD = erroDistancia(Pb, [0,0], parametros["d"])
-    erroE = erroDistancia(Pb, Pc, parametros["e"])
-    erroF = erroDistancia(Pd, [0,0], parametros["f"])
-    erroG = erroDistancia(Pd, Pi, parametros["g"])
-    erroH = erroDistancia(Pc, Pd, parametros["h"])
-    erroI = erroDistancia(Pc, Po, parametros["i"])
-    erroJ = erroDistancia(Pd, Po, parametros["j"])
-    
-    return [erroA, erroB, erroC, erroD, erroE, erroF, erroG, erroH, erroI, erroJ]
-    
+history_x, history_y = deque(maxlen=history_len), deque(maxlen=history_len)    
     
 def animate(i):
     estadoAtual = y[i]
